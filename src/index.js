@@ -14,7 +14,7 @@ const allowHeaders = ['Origin', 'X-Requested-With', 'Content-Type', 'Accept',
   'Cache-Control', 'Authorization'];
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3333');
   res.header('Access-Control-Allow-Headers', allowHeaders.join(', '));
   res.header('Access-Control-Allow-Methods',
     'POST, GET, PATCH, DELETE, OPTIONS');
@@ -64,5 +64,5 @@ const server = app.listen(3333, () => {
   const host = server.address().address;
   const port = server.address().PORT;
 
-  console.log('info', `Codeur fighting simulator API listening at http://${host}:${port}`);
+  console.log(`Codeur fighting simulator API listening at http://${host}:${port}`);
 });
