@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const app = require('express')();
 const API = require('json-api');
 const mongoose = require('mongoose');
 
 const db = mongoose.connection;
 
-mongoose.connect('mongodb://localhost/cfs');
+mongoose.connect(process.env.DB_HOST);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('info', 'Connected to database !');
@@ -13,13 +15,7 @@ db.once('open', () => {
 const allowHeaders = ['Origin', 'X-Requested-With', 'Content-Type', 'Accept',
   'Cache-Control', 'Authorization'];
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3333');
-  res.header('Access-Control-Allow-Headers', allowHeaders.join(', '));
-  res.header('Access-Control-Allow-Methods',
-    'POST, GET, PATCH, DELETE, OPTIONS');
-  next();
-});
+
 app.use(require('morgan')('dev'));
 
 const models = {
@@ -60,9 +56,8 @@ app.use((req, res, next) => {
   next();
 });
 
-const server = app.listen(3333, () => {
-  const host = server.address().address;
+const server = app.listen(process.env.PORT, () => {
+  const host = process.env.HOST;
   const port = server.address().port;
-  console.log(server.address());
-  console.log('info', `Codeur fighting simulator API listening at http://${host}:${port}`);
+  console.log('info', `Codeur fighting simulator API listening at ${host}:${port}`);
 });

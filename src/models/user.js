@@ -6,7 +6,7 @@ const md5 = require('md5');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
-const self = "http://skalv-studio.fr";
+const self = process.env.HOST;
 
 const userSchema = new Schema({
   username: {type: String, required: true},
