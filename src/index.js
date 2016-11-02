@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 
 const server = app.listen(3333, () => {
   const host = server.address().address;
-  const port = server.address().PORT;
-
+  const port = server.address().port;
+  console.log(server.address());
   console.log('info', `Codeur fighting simulator API listening at http://${host}:${port}`);
 });
